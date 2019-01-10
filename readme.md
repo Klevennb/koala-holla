@@ -38,11 +38,11 @@ Upon completion of the project you'll need to provide not only the source (via G
 
 ### STRETCH GOALS
 
-- [ ] *Nick* Add CSS to visually indicate which Koalas are ready for transfer
-- [ ] *Britt* Confirmation dialog before deleting (research SweetAlert).
-- [ ] Ability to toggle the display of Koalas ready for transfer.
-- [ ] *Mike* Add form validation, additional styling and a README.md.
-- [ ] *Matt* Client side filtering with a text box
+- [x] **Nick** Add CSS to visually indicate which Koalas are ready for transfer
+- [x] **Britt** Confirmation dialog before deleting (research SweetAlert).
+- [ ] **Nick** Ability to toggle the display of Koalas ready for transfer.
+- [x] **Mike** Add form validation, additional styling and a README.md.
+- [ ] **Matt** Client side filtering with a text box
 - [ ] Ability to edit other information (Name, Age, Notes) for existing Koalas in the db.
 
 ### Sample Wireframe
