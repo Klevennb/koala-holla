@@ -52,6 +52,17 @@ router.post('/', (req, res) => {
 
 // PUT
 
+router.put('/:id', (req, res) => {
+    const queryText = `UPDATE "koalas" SET "ready_to_transfer" = TRUE
+                        WHERE "id" = $1;`;
+    pool.query(queryText, [req.params.id]).then((result) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('Error in PUT /koalas', error);
+        res.sendStatus(500);
+    });
+})
+
 
 // DELETE
 
