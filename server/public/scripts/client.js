@@ -6,11 +6,13 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
+  
 
 }); // end doc ready
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
+  $( '#viewKoalas' ).on( 'click', '#delete-button', deleteKoalas)
 }
 
 function getKoalas(){
@@ -34,7 +36,8 @@ function getKoalas(){
                                   <button class="ready-button">Ready For Transfer</button>
                                 </td>
                                 <td>
-                                  <button class="delete-button">Delete</button>
+                                  <button class="delete-button"
+                                  data-koalaid="${koala.id}">Delete</button>
                                 </td>
                               </tr>`)
     }
@@ -68,4 +71,20 @@ function saveKoala(){
 });
 
 
+}
+
+function deleteKoalas() {
+  console.log($(this).data('koalaid'));
+  const koalaid = $(this).data('koalaid');
+  $.ajax({
+    method: 'DELETE',
+    url: `/koalas?${koalaid}`
+  }).then(function (response) {
+    getKoalas();
+  }).catch(function (error) {
+    alert('Oh, nope, koala stayed');
+    console.log('in delete:', error);
+    
+  });
+  
 }
