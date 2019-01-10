@@ -48,5 +48,24 @@ function getKoalas(){
 
 function saveKoala(){
   // ajax call to server to get koalas
- 
+ const koalaToSend = { 
+    name: $('#nameIn').val(),
+    age: $('#ageIn').val(),
+    gender: $('#genderIn').val(),
+    ready_to_transfer: $('#readyForTransferIn').val(),
+    notes: $('#notesIn').val()
+ };
+ console.log(`currently in koalaToSend ${koalaToSend}`);
+ $.ajax({
+  method: 'POST',
+  url: '/koalas',
+  data: koalaToSend
+}).then(function(result) {
+  console.log(result);
+  getKoalas();
+}).catch(function (error){
+  console.log(`error in Post /koalas ${error}`);
+});
+
+
 }
