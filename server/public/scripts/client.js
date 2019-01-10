@@ -12,7 +12,9 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
-  $( '#viewKoalas' ).on( 'click', '.delete-button', deleteKoalas)
+  $( '#viewKoalas' ).on( 'click', '.delete-button', deleteKoalas);
+  $('#viewKoalas').on('click','.ready-button',setReady);
+
 }
 
 function getKoalas(){
@@ -87,4 +89,18 @@ function deleteKoalas() {
     
   });
   
+}
+
+function setReady(){
+  console.log($(this).data('koalaid'));
+  const koalaid = $(this).data('koalaid');
+  $.ajax({
+    method: 'PUT',
+    url: `/koalas/${koalaid}`
+  }).then(function (response) {
+    getKoalas();
+  }).catch(function (error) {
+    alert('This koala is not ready yet');
+    console.log('in setReady:', error);  
+  });
 }
