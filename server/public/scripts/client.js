@@ -13,10 +13,11 @@ $( document ).ready( function(){
 }); // end doc ready
 
 function setupClickListeners() {
-  $( '#addButton' ).on( 'click', saveKoala); 
-  $( '#viewKoalas' ).on( 'click', '.delete-button', deleteKoalas);
-  $('#viewKoalas').on('click','.ready-button',setReady);
-
+  $('#addButton').on('click', saveKoala); 
+  $('#viewKoalas').on('click', '.delete-button', deleteKoalas);
+  $('#viewKoalas').on('click', '.ready-button', setReady);
+  $('#allKoalasButton').on('click', getKoalas);
+  $('#readyKoalasButton').on('click', getKoalasReady);
 }
 
 function getKoalas(){
@@ -50,15 +51,49 @@ function getKoalas(){
         $(`#${koala.id}`).css('visibility', 'hidden');
         $(`#${koala.id}`).parent().parent().css('background-color','green');
       }; 
-      
     }
-    
-    
   }).catch(function (error) {
     console.log('Returning this error:', error);
-    
   })
-} // end getKoalas  
+} // end getKoalas
+
+function getKoalasReady() {
+  console.log('in getKoalasReady()');
+  $.ajax({
+    method: 'GET',
+    url: '/koalas/ready',
+  }).then(function (response) {
+    const listOfKoalas = response;
+    $('#viewKoalas').empty();
+    for (koala of listOfKoalas) {
+      const htmlString = `
+      <tr>
+        <td>${koala.name}</td>
+        <td>${koala.gender}</td>
+        <td>${koala.age}</td>
+        <td>${koala.ready_to_transfer}</td>
+        <td>${koala.notes}</td>
+        <td>
+          <button class="ready-button" 
+          data-koalaid="${koala.id}"
+          id="${koala.id}">Ready For Transfer</button>
+        </td>
+        <td>
+          <button class="delete-button"
+          data-koalaid="${koala.id}">Delete</button>
+        </td>
+      </tr>
+      `;
+      $('#viewKoalas').append(htmlString);
+      if (koala.ready_to_transfer) {
+        $(`#${koala.id}`).css('visibility', 'hidden');
+        $(`#${koala.id}`).parent().parent().css('background-color', 'green');
+      };
+    }
+  }).catch(function (error) {
+    console.log('Returning this error:', error);
+  })
+}
 
 function saveKoala(){
   // ajax call to server to get koalas
