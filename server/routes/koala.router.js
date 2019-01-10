@@ -34,7 +34,21 @@ router.get('/', (req, res) => {
 });
 
 // POST
-
+router.post('/', (req, res) => {
+    console.log('In /koalas POST with', req.body);
+    const newKoala = req.body;
+    const queryText = `INSERT INTO "koalas" ("name", "gender", "age", "ready_to_transfer", "notes")
+                            VALUES ($1, $2, $3, $4, $5);`;
+    pool.query(queryText, [newKoala.name, newKoala.gender, newKoala.age, newKoala.ready_to_transfer, newKoala.notes])
+        .then((response) => {
+            console.log(response);
+            res.sendStatus(200);
+        }).catch((error) => {
+            console.log(`Error in POST /koalas`, error);
+            res.sendStatus(500);
+        });
+    
+})
 
 // PUT
 
