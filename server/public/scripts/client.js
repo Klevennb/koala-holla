@@ -35,7 +35,8 @@ function getKoalas(){
                                 <td>${koala.ready_to_transfer}</td>
                                 <td>${koala.notes}</td>
                                 <td>
-                                  <button class="ready-button">Ready For Transfer</button>
+                                  <button class="ready-button" 
+                                  data-koalaid="${koala.id}">Ready For Transfer</button>
                                 </td>
                                 <td>
                                   <button class="delete-button"
