@@ -36,13 +36,18 @@ function getKoalas(){
                                 <td>${koala.notes}</td>
                                 <td>
                                   <button class="ready-button" 
-                                  data-koalaid="${koala.id}">Ready For Transfer</button>
+                                  data-koalaid="${koala.id}"
+                                  id="${koala.id}">Ready For Transfer</button>
                                 </td>
                                 <td>
                                   <button class="delete-button"
                                   data-koalaid="${koala.id}">Delete</button>
                                 </td>
-                              </tr>`)
+                              </tr>`);
+      if (koala.ready_to_transfer){
+        $(`#${koala.id}`).css('visibility', 'hidden');
+      }; 
+      
     }
     
     
