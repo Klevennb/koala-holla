@@ -12,7 +12,7 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', saveKoala); 
-  $( '#viewKoalas' ).on( 'click', '#delete-button', deleteKoalas)
+  $( '#viewKoalas' ).on( 'click', '.delete-button', deleteKoalas)
 }
 
 function getKoalas(){
@@ -78,7 +78,7 @@ function deleteKoalas() {
   const koalaid = $(this).data('koalaid');
   $.ajax({
     method: 'DELETE',
-    url: `/koalas?${koalaid}`
+    url: `/koalas/${koalaid}`
   }).then(function (response) {
     getKoalas();
   }).catch(function (error) {
