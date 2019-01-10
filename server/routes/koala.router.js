@@ -48,11 +48,30 @@ router.post('/', (req, res) => {
             res.sendStatus(500);
         });
     
-})
+});
 
 // PUT
 
 
 // DELETE
+
+// Delete a koala from database based on koala's id (via DELETE)
+router.delete('/:id', (req, res) => {
+    const koalaId = req.params.id;
+    console.log('In /koalas DELETE with');
+    const queryText = `
+    DELETE FROM "koalas"
+    WHERE "id" = $1;
+    `;
+    pool.query(queryText, [koalaId])
+        .then((response) => {
+            console.log(response);
+            res.sendStatus(200);
+        }).catch((error) => {
+            console.log(`Error in DELETE /koalas`, error);
+            res.sendStatus(500);
+        });
+
+});
 
 module.exports = router;
