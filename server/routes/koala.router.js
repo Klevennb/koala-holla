@@ -33,6 +33,22 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/ready', (req, res) => {
+    console.log(`--- In /koalas GET`);
+    const sqlText = `
+    SELECT * FROM "koalas" WHERE "ready_to_transfer" = 'TRUE'
+    ORDER BY "name"
+    LIMIT 25;
+    `;
+    pool.query(sqlText).then(function (sqlResult) {
+        console.log(sqlResult);
+        res.send(sqlResult.rows);
+    }).catch(function (sqlError) {
+        console.log(`SQL error in /koalas/ready GET: ${sqlError}`);
+        res.sendStatus(500);
+    });
+});
+
 // POST
 router.post('/', (req, res) => {
     console.log('In /koalas POST with', req.body);
