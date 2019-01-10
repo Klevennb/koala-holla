@@ -1,3 +1,5 @@
+
+
 console.log( 'js' );
 
 $( document ).ready( function(){
@@ -82,19 +84,31 @@ function saveKoala(){
 }
 
 function deleteKoalas() {
+  swal({
+    title: "Are you suuuure?",
+    text: "Once deleted, your koala will disappear!",
+    icon: "warning",
+    buttons: true,
+  }).then((willDelete) => {
+      if (willDelete) {
+        swal("Your koala is no more", {
+          icon: "success",
+        })
+        const koalaid = $(this).data('koalaid');
+        $.ajax({
+          method: 'DELETE',
+          url: `/koalas/${koalaid}`
+        }).then(function (response) {
+          getKoalas();
+        }).catch(function (error) {
+          alert('Oh, nope, koala stayed');
+          console.log('in delete:', error);
+        });;
+      } else {
+        swal("Your koala is safe!");
+      }
+    });
   console.log($(this).data('koalaid'));
-  const koalaid = $(this).data('koalaid');
-  $.ajax({
-    method: 'DELETE',
-    url: `/koalas/${koalaid}`
-  }).then(function (response) {
-    getKoalas();
-  }).catch(function (error) {
-    alert('Oh, nope, koala stayed');
-    console.log('in delete:', error);
-    
-  });
-  
 }
 
 function setReady(){
@@ -106,7 +120,7 @@ function setReady(){
   }).then(function (response) {
     getKoalas();
   }).catch(function (error) {
-    alert('This koala is not ready yet');
+    swal('This koala is not ready yet');
     console.log('in setReady:', error);  
   });
 }
