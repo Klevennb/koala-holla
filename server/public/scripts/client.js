@@ -59,26 +59,51 @@ function getKoalas(){
 
 function saveKoala(){
   // ajax call to server to get koalas
- const koalaToSend = { 
-    name: $('#nameIn').val(),
-    age: $('#ageIn').val(),
-    gender: $('#genderIn').val(),
-    ready_to_transfer: $('#readyForTransferIn').val(),
-    notes: $('#notesIn').val()
- };
- console.log(`currently in koalaToSend ${koalaToSend}`);
- $.ajax({
-  method: 'POST',
-  url: '/koalas',
-  data: koalaToSend
-}).then(function(result) {
-  console.log(result);
-  getKoalas();
-}).catch(function (error){
-  console.log(`error in Post /koalas ${error}`);
-});
+  const nameIn = $('#nameIn').val();
+  const ageIn = $('#ageIn').val();
+  const genderIn = $('#genderIn').val();
+  let readyForTransferIn = $('#readyForTransferIn').val();
+  const notesIn = $('#notesIn').val();
 
+  if (!nameIn) {
+    alert('Please provide a name for the new koala.');
+  } else if (!ageIn) {
+    alert('Please provide an age for the new koala.');
+  } else if (!genderIn) {
+    alert('Please provide a gender for the new koala.');
+  } else {
+    if (!readyForTransferIn) {
+      readyForTransferIn = 'false';
+    }
+    const koalaToSend = { 
+      name: nameIn,
+      age: ageIn,
+      gender: genderIn,
+      ready_to_transfer: readyForTransferIn,
+      notes: notesIn
+    };
+    console.log(`Currently in koalaToSend ${koalaToSend}`);
+    $.ajax({
+      method: 'POST',
+      url: '/koalas',
+      data: koalaToSend
+    }).then(function(result) {
+      console.log(result);
+      getKoalas();
+      clearInputs();
+    }).catch(function (error){
+      console.log(`error in Post /koalas ${error}`);
+    });
+  }
+}
 
+// Clear all input fields
+function clearInputs() {
+  $('#nameIn').val('');
+  $('#ageIn').val('');
+  $('#genderIn').val('');
+  $('#readyForTransferIn').val('');
+  $('#notesIn').val('');
 }
 
 function deleteKoalas() {
