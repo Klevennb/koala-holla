@@ -46,6 +46,7 @@ function getKoalas(){
                               </tr>`);
       if (koala.ready_to_transfer){
         $(`#${koala.id}`).css('visibility', 'hidden');
+        $(`#${koala.id}`).parent().parent().css('background-color','green');
       }; 
       
     }
