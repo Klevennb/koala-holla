@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Koalla Holla</title>
-    <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
-    <script src="vendors/sweetalert.min.js"></script>
-    <script src="scripts/client.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="views/styles.css">
-  </head>
-  <body>
-    <header>
-      <img src="images/icon.png" class="icon" />
+
+<head>
+  <meta charset="utf-8">
+  <title>Koalla Holla</title>
+  <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
+  <script src="vendors/sweetalert.min.js"></script>
+  <script src="scripts/client.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="vendors/bootstrap.min.css">
+  <link rel="stylesheet" href="views/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="jumbotron">
+      <img src="./images/icon.png" class="rounded float-right" alt="koala" height="200px" width="200px">
       <h1>Koala Holla</h1>
       <h3>1976 Llama Comma Drive</h2>
-      <h3>Walla Walla, WA</h2>
+        <h3>Walla Walla, WA</h2>
+      
     </header>
     <section id="addKoala">
+
       <h2>Add Koala</h2>
-      <input type="text" id="nameIn" value="" placeholder="Name">
-      <input type="text" id="ageIn" value="" placeholder="Age">
-      <input type="text" id="genderIn" value="" placeholder="Gender">
-      <input type="text" id="readyForTransferIn" value="" placeholder="Transfer">
-      <input type="text" id="notesIn" value="" placeholder="Notes">
-      <button type="button" id="addButton">Add Koala</button>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Koala Details</span>
+        </div>
+        <input type="text" aria-label="First name" placeholder="Name"id="nameIn" class="form-control">
+        <input type="text" aria-label="Last name" placeholder="Age"id="ageIn" class="form-control">
+        <input type="text" aria-label="First name" placeholder="Sex"id="genderIn" class="form-control">
+        <input type="text" aria-label="Last name" placeholder="Ready For Transfer?"id="readyForTransferIn" class="form-control">
+        <input type="text" aria-label="Last name" placeholder="Notes"id="notesIn" class="form-control">
+        <button type="button" class="btn btn-primary" id="addButton">Add Koala</button>
+      </div>
+      <!-- <div>
+        <!-- <input  type="text" id="nameIn" value="" placeholder="Name">
+        <input  type="text" id="ageIn" value="" placeholder="Age">
+        <input  type="text" id="genderIn" value="" placeholder="Gender">
+        <input  type="text" id="readyForTransferIn" value="" placeholder="Transfer">
+        <input  type="text" id="notesIn" value="" placeholder="Notes"> -->
+        <!-- <button type="button" class="btn btn-primary" id="addButton">Add Koala</button> -->
+      <!-- </div> -->
+      
     </section>
     <section>
       <h2>Koalas</h2>
       <button id="allKoalasButton">List All</button>
       <button id="readyKoalasButton">List Ready</button>
-      <table>
-        <thead>
+      <table class="table">
+        <thead class="thead-dark">
           <tr>
             <th>Name</th>
-            <th>Age</th>
             <th>Gender</th>
+            <th>Age</th>
             <th>Ready for Transfer</th>
             <th>Notes</th>
             <th>Mark Ready</th>
@@ -44,5 +64,7 @@
         </tbody>
       </table>
     </section>
-  </body>
+  </div>
+</body>
+
 </html>

@@ -14,7 +14,7 @@ $( document ).ready( function(){
 
 function setupClickListeners() {
   $('#addButton').on('click', saveKoala); 
-  $('#viewKoalas').on('click', '.delete-button', deleteKoalas);
+  $('#viewKoalas').on('click', '#delete-button', deleteKoalas);
   $('#viewKoalas').on('click', '.ready-button', setReady);
   $('#allKoalasButton').on('click', getKoalas);
   $('#readyKoalasButton').on('click', getKoalasReady);
@@ -43,13 +43,13 @@ function getKoalas(){
                                   id="${koala.id}">Ready For Transfer</button>
                                 </td>
                                 <td>
-                                  <button class="delete-button"
+                                  <button id="delete-button" class="btn btn-warning"
                                   data-koalaid="${koala.id}">Delete</button>
                                 </td>
                               </tr>`);
       if (koala.ready_to_transfer){
         $(`#${koala.id}`).css('visibility', 'hidden');
-        $(`#${koala.id}`).parent().parent().css('background-color','green');
+        $(`#${koala.id}`).parent().parent().css('background-color','gray');
       }; 
     }
   }).catch(function (error) {
@@ -79,7 +79,7 @@ function getKoalasReady() {
           id="${koala.id}">Ready For Transfer</button>
         </td>
         <td>
-          <button class="delete-button"
+          <button id="delete-button" class="btn btn-danger"
           data-koalaid="${koala.id}">Delete</button>
         </td>
       </tr>
@@ -87,7 +87,7 @@ function getKoalasReady() {
       $('#viewKoalas').append(htmlString);
       if (koala.ready_to_transfer) {
         $(`#${koala.id}`).css('visibility', 'hidden');
-        $(`#${koala.id}`).parent().parent().css('background-color', 'green');
+        $(`#${koala.id}`).parent().parent().css('background-color', 'gray');
       };
     }
   }).catch(function (error) {
